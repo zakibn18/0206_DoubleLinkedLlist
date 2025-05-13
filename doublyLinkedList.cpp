@@ -51,6 +51,9 @@ void addNode()
   // Kondisi jika semua kondisi if tidak terpenuhi
   else
   {
+    // set nilai current = start dan nilai previous NULL
+    Node *current = START;
+    Node *previous = NULL;
 
   }
 }
