@@ -71,6 +71,14 @@ void addNode()
     {
       current->perv = newNode;
     }
+
+    // Kondisi jika previous tidak sama dengan null 
+    if (previous != NULL)
+    {
+      previous->next = newNode;
+    }
+
+   
   }
 }
 
