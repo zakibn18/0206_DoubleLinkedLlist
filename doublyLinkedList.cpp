@@ -48,6 +48,11 @@ void addNode()
     START = newNode;      // step 6: make teh new node the first node
   }
 
+  // Kondisi jika semua kondisi if tidak terpenuhi
+  else
+  {
+
+  }
 }
 
 int main()
