@@ -11,6 +11,9 @@ struct Node
   Node * perv;
 };
 
+// Deklarasi poiter START dan pemberian nilai
+Node *START;
+
 int main()
 {
   
