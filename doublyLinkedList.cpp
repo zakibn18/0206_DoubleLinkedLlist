@@ -160,23 +160,46 @@ bool listEmpty()
 
 //prosedur tarverse unutk menampilkan data secara urut
 void traverse()
+{
+  if (listEmpty())
+  {
+    cout << "\nList is empty\n";
+  }
+  else
+  {
+    cout << "\nRecords in desecnding order of roll number are: \n" << endl;
+    Node *currentNode = START;
+    while (currentNode != NULL)
     {
-      if (listEmpty())
-      {
-        cout << "\nList Kosong\n";
-      }
-      else
-      {
-        cout << "\nData didalam list adalah : \n";
-        Node *currentNode = START;
-        while (currentNode != NULL)
-        {
-          cout << currentNode-> noMhs << endl;
-          currentNode = currentNode->next;
-        }
-        cout << endl;
-      }
+      cout << currentNode-> noMhs << endl;
+      currentNode = currentNode->next;
     }
+    cout << endl;
+  }
+}
+
+
+// prosedur unutuk mencari data dan menampilkan data yang dicari jika ada
+void searchData()
+{
+  if (listEmpty() == true)
+  {
+    cout << "\nList is empty" << endl;
+  }
+  Node *prev, *curr;
+  prev = curr = NULL;
+  cout << "\nEnter the roll number of the student whose record you want to search :";
+  int num;
+  cin >> num;
+  if (search(num, &prev, &curr) == false)
+    cout << "\nRecord not found" << endl;
+  else
+  {
+    cout << "\nRecord found" << endl;
+    cout << "\nRoll Number" << endl;
+    cout << "\nName" << curr->name << endl;
+  }
+}
 
 int main()
 {
