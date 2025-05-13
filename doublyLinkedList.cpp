@@ -170,11 +170,13 @@ void traverse()
     cout << "\nRecords in desecnding order of roll number are: \n" << endl;
     Node *currentNode = START;
     while (currentNode != NULL)
-    {
-      cout << currentNode-> noMhs << endl;
       currentNode = currentNode->next;
+
+    while (currentNode != NULL)
+    {
+      cout << currentNode->noMhs << " " << currentNode->name << endl;
+      currentNode = currentNode->perv;
     }
-    cout << endl;
   }
 }
 
