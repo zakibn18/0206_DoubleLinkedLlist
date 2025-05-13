@@ -3,12 +3,12 @@ using namespace std;
 
 struct Node
 {
-  // deklarasi noMhs dan name untuk menapung data 
+  // deklarasi noMhs dan name untuk menapung data
   int noMhs;
   string name;
   // dekalrasi pointer next dan pref untuk penunjukan data sebelum dan sesudah
   Node *next;
-  Node * perv;
+  Node *prev;
 };
 
 // Deklarasi poiter START dan pemberian nilai
@@ -17,11 +17,11 @@ Node *START;
 // Deklarasi prosedur addNode
 void addNode()
 {
-  //pembuatan node dan pemberian value untuk data noMhs dan name
+  // pembuatan node dan pemberian value untuk data noMhs dan name
   Node *newNode = new Node(); // step 1 Buat node baru
   cout << "\nEnter the roll number if the student : ";
   cin >> newNode->noMhs;
-  cout<< "\nEnter the name of the student : ";
+  cout << "\nEnter the name of the student : ";
   cin >> newNode->name;
 
   // Insert the new Node in the list
@@ -38,13 +38,13 @@ void addNode()
     // Jika list kosong maka node next nya adalah START
     newNode->next = START;
     // kondisi jika start tidak memiliki nilai atau tidak kosong
-    if ( START != NULL)
+    if (START != NULL)
     {
-      START->perv = newNode;
+      START->prev = newNode;
     }
 
     // memberi nilai prev = null dan start = node baru
-    newNode->perv = NULL; // step 5: make the new node point to null 
+    newNode->prev = NULL; // step 5: make the new node point to null
     START = newNode;      // step 6: make teh new node the first node
   }
 
@@ -64,15 +64,15 @@ void addNode()
 
     // set Nilai next node baru = current dan prev node baru = previous
     newNode->next = current;
-    newNode->perv = previous;
+    newNode->prev = previous;
 
     // Kondisi jika current tidak sama dengan NULL
     if (current != NULL)
     {
-      current->perv = newNode;
+      current->prev = newNode;
     }
 
-    // Kondisi jika previous tidak sama dengan null 
+    // Kondisi jika previous tidak sama dengan null
     if (previous != NULL)
     {
       previous->next = newNode;
@@ -130,24 +130,24 @@ void deleteNode()
     return;
   }
 
-  //node tobe deleted in the first node
+  // node tobe deleted in the first node
   if (current = START)
   {
     START = START->next;
     if (START != NULL)
     {
-      START->perv = NULL;
+      START->prev = NULL;
     }
   }
   else
-  { //node to be deleted is not the first node
+  { // node to be deleted is not the first node
     previous->next = current->next;
     if (current->next != NULL)
     { // if there's a seccessor, update its prev pointer
-      current->next->perv = previous;
+      current->next->prev = previous;
     }
   }
-  
+
   delete current;
   cout << "\x1b[32mRecord with roll number " << rollNo << "deleted\x1b[0m" << endl;
 }
@@ -158,7 +158,7 @@ bool listEmpty()
   return (START == NULL);
 }
 
-//prosedur tarverse unutk menampilkan data secara urut
+// prosedur tarverse unutk menampilkan data secara urut
 void traverse()
 {
   if (listEmpty())
@@ -167,7 +167,8 @@ void traverse()
   }
   else
   {
-    cout << "\nRecords in desecnding order of roll number are: \n" << endl;
+    cout << "\nRecords in desecnding order of roll number are: \n"
+         << endl;
     Node *currentNode = START;
     while (currentNode != NULL)
       currentNode = currentNode->next;
@@ -175,11 +176,29 @@ void traverse()
     while (currentNode != NULL)
     {
       cout << currentNode->noMhs << " " << currentNode->name << endl;
-      currentNode = currentNode->perv;
+      currentNode = currentNode->prev;
     }
   }
 }
 
+void revtraverse()
+{
+    if (listEmpty())
+        cout << "\nList is empty" << endl;
+    else
+    {
+        cout << "\nRecords in descending order of roll number are:" << endl;
+        Node *currentNode = START;
+        while (currentNode->next != NULL)
+            currentNode = currentNode->next;
+
+        while (currentNode != NULL)
+        {
+            cout << currentNode->noMhs << " " << currentNode->name << endl;
+            currentNode = currentNode->prev;
+        }
+    }
+}
 
 // prosedur unutuk mencari data dan menampilkan data yang dicari jika ada
 void searchData()
@@ -205,5 +224,52 @@ void searchData()
 
 int main()
 {
-  
+  // perulangan selama bernilai benar untuk program utama double Linked List
+  while (true)
+  {
+    try
+    {
+      cout << endl
+           << "Menu";
+      cout << endl
+           << "1. Menambah data kedalam list" << endl;
+      cout << "2. Menghapus data dari dalam list" << endl;
+      cout << "3. Menampilkan semua data didalam list meningkat" << endl;
+      cout << "4. Menampilkan semua data didalam list menurun" << endl;
+      cout << "5. Mencari data dalam list" << endl;
+      cout << "6. keluar" << endl;
+      cout << endl
+           << "Masukkan pilihan (1-6) : ";
+      char ch;
+      cin >> ch;
+
+      switch (ch)
+      {
+      case '1':
+        addNode();
+        break;
+      case '2':
+        deleteNode();
+        break;
+      case '3':
+        traverse();
+        break;
+      case '4':
+        revtraverse();
+        break;
+      case '5':
+        searchData();
+        break;
+      case '6':
+        return 0;
+      default:
+        cout << "\nInvalid option" << endl;
+        break;
+      }
+    }
+    catch (exception &e)
+    {
+      cout << "Check for the values entered." << endl;
+    }
+  }
 }
