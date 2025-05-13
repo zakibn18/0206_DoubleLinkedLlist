@@ -42,7 +42,12 @@ void addNode()
     {
       START->perv = newNode;
     }
+
+    // memberi nilai prev = null dan start = node baru
+    newNode->perv = NULL; // step 5: make the new node point to null 
+    START = newNode;      // step 6: make teh new node the first node
   }
+
 }
 
 int main()
