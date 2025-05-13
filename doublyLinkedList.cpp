@@ -37,7 +37,11 @@ void addNode()
 
     // Jika list kosong maka node next nya adalah START
     newNode->next = START;
-   
+    // kondisi jika start tidak memiliki nilai atau tidak kosong
+    if ( START != NULL)
+    {
+      START->perv = newNode;
+    }
   }
 }
 
